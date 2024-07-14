@@ -18,7 +18,7 @@ const Services = () => {
         {ServicesData.map((feature, index) => (
           <div
             key={index}
-            className="relative overflow-hidden rounded-lg shadow-md hover:border-brown-300 bg-gradient-to-t from-light-green-50 to-white border-4 border-teal-100 border-double select-none p-2 "
+            className="relative overflow-hidden rounded-lg shadow-md hover:border-brown-300 hover:scale-105 bg-gradient-to-t from-light-green-50 to-white border-4 border-teal-100 border-double select-none p-2 "
           >
             <div className="flex h-[180px] flex-col justify-between rounded-md p-6">
               <img

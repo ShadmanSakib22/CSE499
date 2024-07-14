@@ -21,12 +21,11 @@ export const doCreateUserWithEmailAndPassword = async (email, password) => {
   // Additional user data initialization
   await set(ref(database, 'users/' + user.uid), {
     email: user.email,
-    displayName: user.email.split('@')[0], // Extract display name before "@"
-    role: 'client',
+    role: 'Guest',
     profilePicture: '',
-    login_status: 'online',
-    verification: 'incomplete',
-    subscription_status: 'free',
+    login_status: 'Online',
+    verification: 'Incomplete',
+    subscription_status: 'Free',
   });
   
   return userCredential;
@@ -59,18 +58,18 @@ export const doSignInWithGoogle = async () => {
   if (!snapshot.exists()) {
     await set(userRef, {
       email: user.email,
-      role: 'client',
+      role: 'Guest',
       profilePicture: '',
-      login_status: 'online',
-      verification: 'completed',
-      displayName: user.displayName,
-      subscription_status: 'free',
+      login_status: 'Online',
+      verification: 'Completed',
+      
+      subscription_status: 'Free',
     });
     }
   if (snapshot.exists()) {
     await update(userRef, {
-      login_status: 'online',
-      displayName: user.displayName,
+      login_status: 'Online',
+     
     });
   }
   return result;

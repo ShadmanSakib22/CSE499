@@ -3,6 +3,7 @@ import { BackgroundBeams } from "./background-beams";
 import { Button } from "@material-tailwind/react";
 import bgimg from "../assets/remote-access.jpg";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   const [text] = useTypewriter({
@@ -39,12 +40,16 @@ const HeroSection = () => {
         </div>
 
         <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 mt-8 z-10">
-          <Button className="w-40 h-10 rounded-xl bg-black border dark:border-white border-transparent text-white text-sm hover:bg-green-200">
-            Sign-In
-          </Button>
-          <Button className="w-40 h-10 rounded-xl bg-white text-black border border-black text-sm hover:bg-blue-200">
-            Services
-          </Button>
+          <Link to="/login">
+            <Button className="w-40 h-10 rounded-xl bg-black border dark:border-white border-transparent text-white text-sm hover:bg-green-200">
+              Sign-In
+            </Button>
+          </Link>
+          <Link to="/services">
+            <Button className="w-40 h-10 rounded-xl bg-white text-black border border-black text-sm hover:bg-blue-200">
+              Services
+            </Button>
+          </Link>
         </div>
       </div>
       <BackgroundBeams />

@@ -14,7 +14,6 @@ import { ref as dbRef, get, update } from "firebase/database";
 
 function UserProfile() {
   const [user, setUser] = useState(null);
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
   const [verification, setVerification] = useState("");
@@ -46,7 +45,6 @@ function UserProfile() {
       const snapshot = await get(userRef);
       if (snapshot.exists()) {
         const data = snapshot.val();
-        setUsername(data.displayName || "");
         setEmail(data.email || "");
         setRole(data.role || "");
         setVerification(data.verification || "");
@@ -137,8 +135,7 @@ function UserProfile() {
           </div>
           <div className="grid text-wrap m-2">
             <h2 className="text-xl font-bold mb-2">Account Information</h2>
-            <p className="text-md bg-gray-100 font-semibold">Username:</p>
-            <p className="text-md mb-1">{username}</p>
+
             <p className="text-md bg-gray-100 font-semibold">Email:</p>
             <p className="text-md mb-1">{email}</p>
             <p className="text-md bg-gray-100 font-semibold">Role:</p>
@@ -163,6 +160,7 @@ function UserProfile() {
               }
               alt="Profile Picture"
             />
+
             <input
               type="file"
               onChange={handleProfilePictureChange}

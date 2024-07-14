@@ -46,7 +46,7 @@ export function AuthProvider({ children }) {
       if (isEmail && user.emailVerified) {
         const userRef = ref(database, "users/" + user.uid);
         await update(userRef, {
-          verification: "completed",
+          verification: "Completed",
         });
         setUserLoggedIn(true);
       }
