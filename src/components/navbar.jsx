@@ -193,7 +193,7 @@ function NavListMenu() {
           </ul>
         </MenuList>
       </Menu>
-      <div className="block lg:hidden bg-gradient-to-tr from-light-green-50 to-light-green-100 rounded-xl mx-2">
+      <div className="block lg:hidden bg-gradient-to-tr from-light-green-50 to-light-green-100 rounded-xl mx-2 max-h-[270px] overflow-auto">
         <Collapse open={isMobileMenuOpen}>{renderItems}</Collapse>
       </div>
     </React.Fragment>
@@ -205,7 +205,7 @@ function AccDropDown() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const renderItems = AccDropDownItems.map(({ icon, title, path }, key) => (
     <Link to={path} key={key}>
-      <MenuItem className="flex items-center gap-3 rounded-lg">
+      <MenuItem className="flex items-center gap-3 rounded-lg max-h-10 overflow-auto">
         <div className="flex items-center justify-center rounded-lg p-2">
           {React.createElement(icon, {
             strokeWidth: 2,
@@ -308,7 +308,16 @@ export function NavbarMain() {
       "resize",
       () => window.innerWidth >= 960 && setOpenNav(false)
     );
-  }, []);
+    if (openNav) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [openNav]);
 
   return (
     <Navbar
@@ -359,7 +368,7 @@ export function NavbarMain() {
         </IconButton>
       </div>
 
-      <Collapse open={openNav}>
+      <Collapse open={openNav} >
         <NavList />
         <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
           <Link to="/subscribe" className="w-full">
