@@ -13,7 +13,7 @@ const About = () => {
             <br />
             <p>
               Tired of confusing interfaces and long wait times for remote tech
-              help? At TechSolutions, we understand the frustration. That's why
+              help? At TechSolutions, we understand the frustration. That’s why
               we created a platform that streamlines remote assistance, making
               it easier than ever for clients to connect with skilled
               technicians.
@@ -62,10 +62,10 @@ const About = () => {
         <br/>Let’s grow together and make a difference in the tech world!
       </p>
       
-      <div className="flex justify-start flex-wrap text-nowrap font-medium text-md lg:gap-2 mt-4 pb-[5rem]">
+      <div className="flex justify-start flex-wrap text-nowrap font-medium text-md gap-2 mt-4 pb-[5rem]">
         <div className="sm:pt-0 pt-3">
           <a
-            className="min-w-[250px] py-2.5 px-4 text-center duration-150 flex items-center justify-center gap-x-1 h-12 text-white bg-black hover:bg-slate-800 ring-offset-2 ring-blue-600 focus:ring shadow rounded-lg active:bg-gray-900"
+            className="min-w-[250px] py-2.5 px-4 text-center duration-150 flex items-center justify-center gap-x-1 h-12 border-solid border-2 border-gray-600 text-black bg-white hover:bg-gray-50 ring-offset-2 ring-blue-600 focus:ring shadow rounded-lg"
             href=""
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">

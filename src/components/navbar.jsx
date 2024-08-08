@@ -205,7 +205,7 @@ function AccDropDown() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const renderItems = AccDropDownItems.map(({ icon, title, path }, key) => (
     <Link to={path} key={key}>
-      <MenuItem className="flex items-center gap-3 rounded-lg max-h-10 overflow-auto">
+      <MenuItem className="flex items-center gap-3 rounded-lg max-h-10 overflow-auto scrollbar-hide">
         <div className="flex items-center justify-center rounded-lg p-2">
           {React.createElement(icon, {
             strokeWidth: 2,
@@ -308,16 +308,7 @@ export function NavbarMain() {
       "resize",
       () => window.innerWidth >= 960 && setOpenNav(false)
     );
-    if (openNav) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, [openNav]);
+  }, []);
 
   return (
     <Navbar
