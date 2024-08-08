@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { auth, database } from "../firebase/firebase";
 import { ref, set, onChildAdded } from "firebase/database";
 import { onAuthStateChanged } from "firebase/auth";
+import Filter from "bad-words"; // Import the bad-words package
 
 const PubChannel = () => {
   const [messages, setMessages] = useState([]);
@@ -17,7 +18,6 @@ const PubChannel = () => {
         onChildAdded(fetchChat, (snapshot) => {
           const messageData = snapshot.val();
 
-          // Check if message is already in state
           setMessages((prevMessages) => {
             const messageExists = prevMessages.some(
               (msg) => msg.timestamp === messageData.timestamp
@@ -33,7 +33,6 @@ const PubChannel = () => {
           scrollToBottom();
         });
       } else {
-        // Redirect to login page if user is not logged in
         window.location.href = "/login";
       }
     });
@@ -42,10 +41,13 @@ const PubChannel = () => {
   const handleSendMessage = (e) => {
     e.preventDefault();
     if (messageInput.trim()) {
+      const filter = new Filter(); // Create a new Filter instance
+      const cleanMessage = filter.clean(messageInput); // Filter the input
+
       const timestamp = Date.now();
       const message = {
         username,
-        message: messageInput,
+        message: cleanMessage,
         timestamp,
       };
 
@@ -94,9 +96,9 @@ const PubChannel = () => {
           <div className="w-full">
             <div
               id="chat"
-              className="overflow-y-scroll h-[30rem] bg-gray-50 p-4 rounded-md border-4 border-double border-brown-500 mb-4"
+              className="overflow-y-scroll h-[30rem] bg-gray-50 p-4 rounded-md border-4 border-double border-gray-200 mb-4"
             >
-              <ul id="messages" className="list-none p-0">
+              <ul id="messages" className="list-none p-2">
                 {messages.map((msg, index) => (
                   <li
                     key={index}

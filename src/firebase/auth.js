@@ -42,7 +42,7 @@ export const doSignInWithEmailAndPassword = async (email, password) => {
 
   const userRef = ref(database, 'users/' + user.uid);
     await update(userRef, {
-      login_status: 'online',
+      login_status: 'Online',
     });
 
   return userCredential;
@@ -81,7 +81,7 @@ export const doSignOut = async () => {
     if (auth.currentUser) {
     const userRef = ref(database, 'users/' + auth.currentUser.uid);
     await update(userRef, {
-      login_status: 'offline',
+      login_status: 'Offline',
     });
   }
   

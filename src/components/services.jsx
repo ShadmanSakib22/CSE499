@@ -4,7 +4,7 @@ const Services = () => {
   return (
     <section
       id="Services"
-      className="mx-auto px-4 space-y-6 bg-gradient-to-b from-brown-50 to-gray-50 py-[5rem]"
+      className="mx-auto px-4 space-y-6 bg-gradient-to-b from-brown-50 to-gray-50 py-[6rem]"
     >
       <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
         <h2 className="font-bold text-3xl leading-[1.1] sm:text-3xl md:text-6xl underline decoration-8 decoration-blue-300">
