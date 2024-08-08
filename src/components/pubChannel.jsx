@@ -22,13 +22,19 @@ const PubChannel = () => {
             const messageExists = prevMessages.some(
               (msg) => msg.timestamp === messageData.timestamp
             );
-
+          
             if (!messageExists) {
-              return [...prevMessages, messageData];
+              const updatedMessages = [...prevMessages, messageData];
+          
+              // Limit the messages array to the last 50 messages
+              if (updatedMessages.length > 50) {
+                updatedMessages.shift(); // Remove the oldest message
+              }
+              return updatedMessages;
             }
-
+          
             return prevMessages;
-          });
+          });          
 
           scrollToBottom();
         });
@@ -92,6 +98,8 @@ const PubChannel = () => {
           </div>
         </h6>
 
+        {/*Search User*/}
+
         <div className="flex flex-wrap">
           <div className="w-full">
             <div
@@ -102,9 +110,10 @@ const PubChannel = () => {
                 {messages.map((msg, index) => (
                   <li
                     key={index}
-                    className={`rounded ${
-                      username === msg.username ? "bg-amber-50" : "bg-gray-50"
+                    className={`rounded-2xl p-2 my-2 inline-block ${
+                      username === msg.username ? "bg-amber-50 text-right" : "bg-brown-50"
                     }`}
+                    
                   >
                     <span
                       className={`font-bold ${
@@ -116,6 +125,7 @@ const PubChannel = () => {
                       [{formatTimestamp(msg.timestamp)}] {msg.username}:
                     </span>
                     <span className="ml-2 text-black">{msg.message}</span>
+                    
                   </li>
                 ))}
               </ul>
