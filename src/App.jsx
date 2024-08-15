@@ -10,7 +10,6 @@ import Services from "./components/services";
 import Advertise from "./components/advertise";
 import SubscribeCTA from "./components/subscribecta";
 import JoinTeam from "./components/joinTeam";
-import Contact from "./components/contact";
 import Footer from "./components/footer";
 import Login from "./components/login";
 import Logout from "./components/logout";
@@ -18,8 +17,8 @@ import Register from "./components/register";
 import Subscribe from "./components/subscribe";
 import Profile from "./components/profile";
 import Support from "./components/pubChannel";
-import PremiumSup from "./components/priChannel";
 import Feedback from "./components/feedback";
+import ProfileRes from "./components/ProfileRes";
 
 function App() {
   return (
@@ -31,16 +30,15 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
-            <Route path="/contact" element={<Contact />} />
             <Route path="/join-team" element={<JoinTeam />} />
             <Route path="/subscribe" element={<Subscribe />} />
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/support" element={<Support />} />
-            <Route path="/premium-support" element={<PremiumSup />} />
+            <Route path="/support" element={<Support />} />            
             <Route path="/feedback" element={<Feedback />} />
+            <Route path="/profile-res" element={<ProfileRes />} />
             <Route path="*" element={<h1>404 Not Found</h1>} />
           </Routes>
           <Footer />

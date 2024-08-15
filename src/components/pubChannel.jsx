@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { auth, database } from "../firebase/firebase";
 import { ref, set, onChildAdded } from "firebase/database";
 import { onAuthStateChanged } from "firebase/auth";
@@ -8,6 +9,15 @@ const PubChannel = () => {
   const [messages, setMessages] = useState([]);
   const [messageInput, setMessageInput] = useState("");
   const [username, setUsername] = useState("");
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (query.trim()) {
+      navigate(`/profile?email=${encodeURIComponent(query)}`);
+    }
+  };
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -107,10 +117,13 @@ const PubChannel = () => {
               type="text"
               name="query"
               id="query"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
             />
             <button
               type="submit"
               className="absolute inline-flex items-center h-12 px-4 py-2 text-sm text-white transition duration-150 ease-in-out rounded-full outline-none right-0 top-0 bg-brown-600 sm:px-6 sm:text-base sm:font-medium hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brown-500"
+              onClick={handleSearch}
             >
               <svg
                 className="-ml-0.5 sm:-ml-1 mr-2 w-4 h-4 sm:h-5 sm:w-5"

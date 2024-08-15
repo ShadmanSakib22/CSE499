@@ -20,14 +20,11 @@ import {
   Bars3Icon,
   XMarkIcon,
   AcademicCapIcon,
-  LifebuoyIcon,
   RssIcon,
   SparklesIcon,
 } from "@heroicons/react/24/outline";
 import {
   GlobeAmericasIcon,
-  NewspaperIcon,
-  PhoneIcon,
   SquaresPlusIcon,
   SunIcon,
   UserGroupIcon,
@@ -51,34 +48,16 @@ const navListMenuItems = [
     path: "/services",
   },
   {
-    title: "Contact",
-    description: "Reach out to us for any Queries you have.",
-    icon: PhoneIcon,
-    path: "/contact",
-  },
-  {
     title: "Remote Access",
     description: "Browser Portal for Remote Access Connections.",
     icon: SquaresPlusIcon,
     path: "/remote-access",
   },
   {
-    title: "Premium Support",
-    description: "Get Specialized Support from our Best Technicians",
-    icon: GlobeAmericasIcon,
-    path: "/premium-support",
-  },
-  {
     title: "Support Channel",
     description: "Get or Provide Support with the TechSolutions Community.",
-    icon: LifebuoyIcon,
+    icon: GlobeAmericasIcon,
     path: "/support",
-  },
-  {
-    title: "News",
-    description: "Stay up to date with TechSolutions latest changes.",
-    icon: NewspaperIcon,
-    path: "/news",
   },
   {
     title: "Join the Team",
