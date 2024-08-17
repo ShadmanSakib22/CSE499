@@ -15,7 +15,7 @@ const PubChannel = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     if (query.trim()) {
-      navigate(`/profile?email=${encodeURIComponent(query)}`);
+      navigate(`/profile-res?email=${query}`);
     }
   };
 
