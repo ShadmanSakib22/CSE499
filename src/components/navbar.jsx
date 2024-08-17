@@ -60,8 +60,8 @@ const navListMenuItems = [
     path: "/support",
   },
   {
-    title: "Join the Team",
-    description: "We always Welcome qualified Technicians onboard.",
+    title: "The Team & Contact",
+    description: "Join as a Technician or Reach out to us for any Queries.",
     icon: UserGroupIcon,
     path: "/join-team",
   },
@@ -338,7 +338,7 @@ export function NavbarMain() {
         </IconButton>
       </div>
 
-      <Collapse open={openNav} >
+      <Collapse open={openNav}>
         <NavList />
         <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
           <Link to="/subscribe" className="w-full">
