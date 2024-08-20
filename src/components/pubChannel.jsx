@@ -48,12 +48,10 @@ const PubChannel = () => {
 
           scrollToBottom();
         });
-      } else {      
-          // Display an alert and redirect to login page on OK
-          if (window.confirm("You need to be logged in to access the chat. Click OK to go to the login page.")) {
-            window.location.href = "https://cse-499.vercel.app/login";
-          }
-      }
+      } else {
+        // redirect user to login page
+        window.location.href = "https://cse-499.vercel.app/login";
+    }
     });
   }, []);
 
