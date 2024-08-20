@@ -48,15 +48,18 @@ const PubChannel = () => {
 
           scrollToBottom();
         });
-      } else {
-        window.location.href = "/login";
+      } else {      
+          // Display an alert and redirect to login page on OK
+          if (window.confirm("You need to be logged in to access the chat. Click OK to go to the login page.")) {
+            window.location.href = "https://cse-499.vercel.app/login";
+          }
       }
     });
   }, []);
 
   const handleSendMessage = (e) => {
     e.preventDefault();
-    if (messageInput.trim()) {
+    if (messageInput.trim() && username) {
       const filter = new Filter(); // Create a new Filter instance
       const cleanMessage = filter.clean(messageInput); // Filter the input
 

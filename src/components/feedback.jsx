@@ -82,6 +82,7 @@ const Feedback = () => {
               id="feedback-disqus"
               className="overflow-y-scroll h-[30rem] bg-gray-50 p-4 rounded-md border-4 border-double border-gray-200 mb-4"
             >
+              <h4 className="text-xl text-blue-gray-800 pb-2 font-semibold text-center">TechSolutions has helped you <span className="text-brown-700">Find work/Get work done</span>  Efficiently.</h4>
             <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
             </div>
           </div>
