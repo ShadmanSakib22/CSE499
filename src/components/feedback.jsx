@@ -17,7 +17,7 @@ const Feedback = () => {
 
   const disqusShortname = import.meta.env.VITE_DISQUS_SHORTNAME;
   const disqusConfig = {
-    url: window.location.href,
+    url: 'https://cse-499.vercel.app/feedback',
     identifier: 'techsol-feedback', // unique identifier
     title: 'Feedback', // post title
   };
