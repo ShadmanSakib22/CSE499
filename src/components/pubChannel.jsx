@@ -48,13 +48,10 @@ const PubChannel = () => {
 
           scrollToBottom();
         });
-      } else {
-        // redirect user to login page
-        window.location.href = "https://cse-499.vercel.app/login";
-    }
+      } 
     });
   }, []);
-
+  
   const handleSendMessage = (e) => {
     e.preventDefault();
     if (messageInput.trim() && username) {
@@ -89,7 +86,9 @@ const PubChannel = () => {
   };
 
   return (
-    <div className="py-20 container mx-auto">
+    <div className="py-20 container mx-auto min-h-screen">
+    {username ? (
+      <div>
       <div className="flex justify-between items-center border-b pb-4 mb-6">
         <h2 className="text-2xl font-semibold">
           Clients🔗Technicians - Public Chatroom
@@ -197,6 +196,10 @@ const PubChannel = () => {
           </div>
         </div>
       </div>
+      </div>
+    ) : (
+      <p className="mt-[15rem] text-center text-xl">You are not logged in.</p>
+    )}
     </div>
   );
 };
