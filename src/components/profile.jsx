@@ -133,11 +133,11 @@ function UserProfile() {
           <div className="bg-brown-400 rounded-r-full border-brown-50 border-2 shadow-sm shadow-brown-500 mt-4">
             <h1 className="text-3xl font-bold text-white p-1 ml-2">PROFILE</h1>
           </div>
-          <div className="grid text-wrap m-2">
+          <div className="m-2">
             <h2 className="text-xl font-bold mb-2">Account Information</h2>
 
             <p className="text-md bg-gray-100 font-semibold">Email:</p>
-            <p className="text-md mb-1">{email}</p>
+            <p className="text-md mb-1 break-words">{email}</p>
             <p className="text-md bg-gray-100 font-semibold">Role:</p>
             <p className="text-md mb-1">{role}</p>
             <p className="text-md bg-gray-100 font-semibold">Verification:</p>
