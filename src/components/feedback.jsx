@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { DiscussionEmbed } from 'disqus-react';
 
 const Feedback = () => {
   const [query, setQuery] = useState("");
@@ -12,6 +13,13 @@ const Feedback = () => {
     if (query.trim()) {
       navigate(`/profile-res?email=${query}`);
     }
+  };
+
+  const disqusShortname = import.meta.env.VITE_DISQUS_SHORTNAME;
+  const disqusConfig = {
+    url: window.location.href,
+    identifier: 'techsol-feedback', // unique identifier
+    title: 'Feedback', // post title
   };
 
   return (
@@ -27,7 +35,7 @@ const Feedback = () => {
           Feel free to express your feedback here or view the community
           sentiments about our Service!
           <div className="text-sm text-gray-500 mt-2 italic">
-            Note, only clients (paid) can provide feedback.
+            Note, you will need to join disqus to comment.
           </div>
         </h6>
 
@@ -73,7 +81,9 @@ const Feedback = () => {
             <div
               id="feedback-disqus"
               className="overflow-y-scroll h-[30rem] bg-gray-50 p-4 rounded-md border-4 border-double border-gray-200 mb-4"
-            ></div>
+            >
+            <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+            </div>
           </div>
         </div>
       </div>

@@ -16,6 +16,7 @@
     "@tabler/icons-react": "^3.5.0",
     "bad-words": "^3.0.4",
     "clsx": "^2.1.1",
+    "disqus-react": "^1.1.5",
     "dotenv": "^16.4.5",
     "firebase": "^10.12.2",
     "framer-motion": "^11.2.6",
