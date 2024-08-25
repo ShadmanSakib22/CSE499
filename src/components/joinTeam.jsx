@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React from "react";
 import {
   EnvelopeIcon,
@@ -8,11 +9,11 @@ import {
 const joinTeam = () => {
   return (
     <div className="w-full p-10  grid grid-cols-1 md:grid-cols-12 gap-8 bg-gradient-to-b from-gray-50 to-brown-100 pt-[5rem]">
-      <div class="md:col-span-6 relative flex flex-col items-center">
+      <div className="md:col-span-6 relative flex flex-col items-center">
         <img
           src="hiring.svg"
           alt="Hiring"
-          class="w-full shadow-md rounded-t-lg"
+          className="w-full shadow-md rounded-t-lg"
         />
         <div className="p-4 md:p-6 bg-white text-black text-left rounded-b-lg">
           <h2 className="text-2xl font-bold mb-4">
