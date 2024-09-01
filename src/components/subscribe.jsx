@@ -142,7 +142,7 @@ const Subscribe = () => {
                   <div className="mt-6">
                     <div className="rounded-md shadow">
                       <a
-                        href="#"
+                        href="http://localhost:8000/checkout.php?price=9.99"
                         className="flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-brown-500 hover:bg-brown-600"
                       >
                         Buy now
