@@ -7,7 +7,6 @@ import NavbarMain from "./components/navbar";
 import HeroSection from "./components/herosection";
 import About from "./components/about";
 import Services from "./components/services";
-import Advertise from "./components/advertise";
 import SubscribeCTA from "./components/subscribecta";
 import JoinTeam from "./components/joinTeam";
 import Footer from "./components/footer";
@@ -36,7 +35,7 @@ function App() {
             <Route path="/logout" element={<Logout />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/support" element={<Support />} />            
+            <Route path="/support" element={<Support />} />
             <Route path="/feedback" element={<Feedback />} />
             <Route path="/profile-res" element={<ProfileRes />} />
             <Route path="*" element={<h1>404 Not Found</h1>} />
@@ -52,7 +51,6 @@ const HomePage = () => (
   <>
     <HeroSection />
     <About />
-    <Advertise />
     <Services />
     <SubscribeCTA />
     <JoinTeam />
