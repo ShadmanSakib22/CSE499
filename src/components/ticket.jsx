@@ -10,11 +10,15 @@ const TicketForm = () => {
   const [budget, setBudget] = useState("");
   const [timezone, setTimezone] = useState("");
   const [isPaid, setIsPaid] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUsername(user.email);
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
       }
     });
 
@@ -49,60 +53,66 @@ const TicketForm = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-brown-50">
-      <div className="mx-auto p-4 max-w-md bg-white rounded-lg shadow-md">
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="text"
-            value={username}
-            disabled
-            className="w-full p-2 border rounded"
-          />
-          <input
-            type="text"
-            value={issue}
-            onChange={(e) => setIssue(e.target.value)}
-            placeholder="Issue"
-            required
-            className="w-full p-2 border rounded"
-          />
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            placeholder="Description"
-            required
-            className="w-full p-2 border rounded"
-          ></textarea>
-          <input
-            type="number"
-            value={budget}
-            onChange={(e) => setBudget(e.target.value)}
-            placeholder="Budget in USD"
-            className="w-full p-2 border rounded"
-          />
-          <input
-            type="text"
-            value={timezone}
-            onChange={(e) => setTimezone(e.target.value)}
-            placeholder="Your Timezone"
-            className="w-full p-2 border rounded"
-            required
-          />
-          <button
-            type="button"
-            onClick={handlePayment}
-            className="w-full p-2 bg-light-green-400 text-white rounded"
-          >
-            Pay $0.50 Fee
-          </button>
-          <button
-            type="submit"
-            disabled={!isPaid || !issue || !description || !budget || !timezone}
-            className="w-full p-2 bg-brown-800 text-white rounded disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Submit Ticket
-          </button>
-        </form>
-      </div>
+      {isLoggedIn ? (
+        <div className="mx-auto p-4 max-w-md bg-white rounded-lg shadow-md">
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <input
+              type="text"
+              value={username}
+              disabled
+              className="w-full p-2 border rounded"
+            />
+            <input
+              type="text"
+              value={issue}
+              onChange={(e) => setIssue(e.target.value)}
+              placeholder="Issue"
+              required
+              className="w-full p-2 border rounded"
+            />
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Description"
+              required
+              className="w-full p-2 border rounded"
+            ></textarea>
+            <input
+              type="number"
+              value={budget}
+              onChange={(e) => setBudget(e.target.value)}
+              placeholder="Budget in USD"
+              className="w-full p-2 border rounded"
+            />
+            <input
+              type="text"
+              value={timezone}
+              onChange={(e) => setTimezone(e.target.value)}
+              placeholder="Your Timezone"
+              className="w-full p-2 border rounded"
+              required
+            />
+            <button
+              type="button"
+              onClick={handlePayment}
+              className="w-full p-2 bg-light-green-400 text-white rounded"
+            >
+              Pay $0.50 Fee
+            </button>
+            <button
+              type="submit"
+              disabled={
+                !isPaid || !issue || !description || !budget || !timezone
+              }
+              className="w-full p-2 bg-brown-800 text-white rounded disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Submit Ticket
+            </button>
+          </form>
+        </div>
+      ) : (
+        <p className="text-center text-xl">You are not logged in.</p>
+      )}
     </div>
   );
 };
