@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/authContext";
 
@@ -13,17 +13,13 @@ import Footer from "./components/footer";
 import Login from "./components/login";
 import Logout from "./components/logout";
 import Register from "./components/register";
+import Subscribe from "./components/subscribe";
 import Profile from "./components/profile";
 import Support from "./components/pubChannel";
 import Feedback from "./components/feedback";
 import ProfileRes from "./components/ProfileRes";
-import SuccessPage from "./components/SuccessPage";
-import TicketForm from "./components/ticket";
-import PaymentSuccess from "./components/PaymentSuccess";
 
 function App() {
-  const [isPaid, setIsPaid] = useState(false);
-
   return (
     <Router>
       <div>
@@ -34,6 +30,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
             <Route path="/join-team" element={<JoinTeam />} />
+            <Route path="/subscribe" element={<Subscribe />} />
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/register" element={<Register />} />
@@ -41,15 +38,6 @@ function App() {
             <Route path="/support" element={<Support />} />
             <Route path="/feedback" element={<Feedback />} />
             <Route path="/profile-res" element={<ProfileRes />} />
-            <Route path="/success" element={<SuccessPage />} />
-            <Route
-              path="/ticket"
-              element={<TicketForm isPaid={isPaid} setIsPaid={setIsPaid} />}
-            />
-            <Route
-              path="/success"
-              element={<PaymentSuccess setIsPaid={setIsPaid} />}
-            />
             <Route path="*" element={<h1>404 Not Found</h1>} />
           </Routes>
           <Footer />

@@ -146,7 +146,7 @@ function NavListMenu() {
         <MenuHandler>
           <Typography as="div" variant="small" className="font-medium">
             <ListItem
-              className="flex items-center gap-2 py-2 pr-4 font-medium text-light-green-50 rounded-md bg-transparent"
+              className="flex items-center gap-2 py-2 pr-4 font-medium text-light-green-50 rounded-md"
               selected={isMenuOpen || isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
             >
@@ -215,7 +215,7 @@ function AccDropDown() {
         <MenuHandler>
           <Typography as="div" variant="small" className="font-medium">
             <ListItem
-              className="flex items-center gap-2 py-2 pr-4 font-medium text-light-green-50 bg-transparent rounded-md"
+              className="flex items-center gap-2 py-2 pr-4 font-medium text-light-green-50 rounded-md"
               selected={isMenuOpen || isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
             >
@@ -253,13 +253,13 @@ function NavList() {
     <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1 opacity-75 ">
       <Typography
         as="a"
-        href="/ticket"
+        href="#"
         variant="small"
         color="text-light-green-50"
         className="font-medium"
       >
-        <ListItem className="flex items-center gap-2 py-2 pr-4 text-light-green-50 rounded-md bg-transparent">
-          Ticket
+        <ListItem className="flex items-center gap-2 py-2 pr-4 text-light-green-50 rounded-md">
+          Forums
         </ListItem>
       </Typography>
       <Typography
@@ -269,7 +269,7 @@ function NavList() {
         color="text-light-green-50"
         className="font-medium"
       >
-        <ListItem className="flex items-center  py-2 pr-4 text-light-green-50 rounded-md bg-transparent">
+        <ListItem className="flex items-center  py-2 pr-4 text-light-green-50 rounded-md">
           Policies
         </ListItem>
       </Typography>
@@ -312,7 +312,7 @@ export function NavbarMain() {
           <NavList />
           <div className="ml-6"></div>
 
-          <Link to="/download">
+          <Link to="/subscribe">
             <Button
               variant="gradient"
               color="brown"
@@ -320,7 +320,7 @@ export function NavbarMain() {
               className="flex items-center border-2 border-brown-300"
             >
               <SparklesIcon className="h-5 w-5 mr-2" />
-              Download
+              Subscribe
             </Button>
           </Link>
         </div>
@@ -341,7 +341,7 @@ export function NavbarMain() {
       <Collapse open={openNav}>
         <NavList />
         <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
-          <Link to="/download" className="w-full">
+          <Link to="/subscribe" className="w-full">
             <Button
               variant="filled"
               size="sm"
@@ -350,7 +350,7 @@ export function NavbarMain() {
               className="flex items-center border-2 border-brown-300"
             >
               <SparklesIcon className="h-5 w-5 mr-2" />
-              Download
+              Subscribe
             </Button>
           </Link>
         </div>
