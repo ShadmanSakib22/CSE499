@@ -7,17 +7,16 @@ import NavbarMain from "./components/navbar";
 import HeroSection from "./components/herosection";
 import About from "./components/about";
 import Services from "./components/services";
-import SubscribeCTA from "./components/subscribecta";
 import JoinTeam from "./components/joinTeam";
 import Footer from "./components/footer";
 import Login from "./components/login";
 import Logout from "./components/logout";
 import Register from "./components/register";
-import Subscribe from "./components/subscribe";
 import Profile from "./components/profile";
 import Support from "./components/pubChannel";
 import Feedback from "./components/feedback";
 import ProfileRes from "./components/ProfileRes";
+import Ticket from "./components/ticket";
 
 function App() {
   return (
@@ -30,7 +29,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
             <Route path="/join-team" element={<JoinTeam />} />
-            <Route path="/subscribe" element={<Subscribe />} />
+            <Route path="/ticket" element={<Ticket />} />
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/register" element={<Register />} />
@@ -52,7 +51,6 @@ const HomePage = () => (
     <HeroSection />
     <About />
     <Services />
-    <SubscribeCTA />
     <JoinTeam />
   </>
 );

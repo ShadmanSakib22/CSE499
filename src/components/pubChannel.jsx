@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, database } from "../firebase/firebase";
 import { ref, set, onChildAdded } from "firebase/database";
@@ -48,10 +48,10 @@ const PubChannel = () => {
 
           scrollToBottom();
         });
-      } 
+      }
     });
   }, []);
-  
+
   const handleSendMessage = (e) => {
     e.preventDefault();
     if (messageInput.trim() && username) {
@@ -87,119 +87,121 @@ const PubChannel = () => {
 
   return (
     <div className="py-20 container mx-auto min-h-screen">
-    {username ? (
-      <div>
-      <div className="flex justify-between items-center border-b pb-4 mb-6">
-        <h2 className="text-2xl font-semibold">
-          Clients🔗Technicians - Public Chatroom
-        </h2>
-      </div>
-
-      <div className="w-full">
-        <h6 className="text-lg mb-4">
-          Hello,{" "}
-          <span id="userWelcomeMessage" className="font-semibold">
-            {username}
-          </span>{" "}
-          - Welcome to the public chatroom!
-          <div className="text-sm text-gray-500 mt-2 italic">
-            Keep the community safe by avoiding profanities in the chat and
-            reporting any issues/misconduct. ~ Refer to our Policies Page.
+      {username ? (
+        <div>
+          <div className="flex justify-between items-center border-b pb-4 mb-6">
+            <h2 className="text-2xl font-semibold">
+              Clients🔗Technicians - Public Chatroom
+            </h2>
           </div>
-        </h6>
 
-        {/*Search User*/}
-        <div className="my-[30px]">
-          <div className="relative w-full max-w-xl bg-white rounded-full">
-            <input
-              placeholder="e.g. example@email.com"
-              className="rounded-full w-full h-12 bg-transparent py-2 pl-8 pr-32 outline-none border-2 border-gray-100 shadow-md hover:outline-none focus:ring-brown-200 focus:border-brown-200"
-              type="text"
-              name="query"
-              id="query"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-            <button
-              type="submit"
-              className="absolute inline-flex items-center h-12 px-4 py-2 text-sm text-white transition duration-150 ease-in-out rounded-full outline-none right-0 top-0 bg-brown-600 sm:px-6 sm:text-base sm:font-medium hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brown-500"
-              onClick={handleSearch}
-            >
-              <svg
-                className="-ml-0.5 sm:-ml-1 mr-2 w-4 h-4 sm:h-5 sm:w-5"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-              Search
-            </button>
-          </div>
-        </div>
-
-        <div className="flex flex-wrap">
           <div className="w-full">
-            <div
-              id="chat"
-              className="overflow-y-scroll h-[30rem] bg-gray-50 p-4 rounded-md border-4 border-double border-gray-200 mb-4"
-            >
-              <ul id="messages" className="list-none p-2">
-                {messages.map((msg, index) => (
-                  <li
-                    key={index}
-                    className={`rounded-2xl p-2 my-2 ${
-                      username === msg.username ? "bg-amber-50" : "bg-brown-50"
-                    }`}
+            <h6 className="text-lg mb-4">
+              Hello,{" "}
+              <span id="userWelcomeMessage" className="font-semibold">
+                {username}
+              </span>{" "}
+              - Welcome to the public chatroom!
+              <div className="text-sm text-gray-500 mt-2 italic">
+                Keep the community safe by avoiding profanities in the chat and
+                reporting any issues/misconduct. ~ Refer to our Policies Page.
+              </div>
+            </h6>
+
+            {/*Search User*/}
+            <div className="my-[30px]">
+              <div className="relative w-full max-w-xl bg-white rounded-full">
+                <input
+                  placeholder="e.g. example@email.com"
+                  className="rounded-full w-full h-12 bg-transparent py-2 pl-8 pr-32 outline-none border-2 border-gray-100 shadow-md hover:outline-none focus:ring-brown-200 focus:border-brown-200"
+                  type="text"
+                  name="query"
+                  id="query"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                />
+                <button
+                  type="submit"
+                  className="absolute inline-flex items-center h-12 px-4 py-2 text-sm text-white transition duration-150 ease-in-out rounded-full outline-none right-0 top-0 bg-brown-600 sm:px-6 sm:text-base sm:font-medium hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brown-500"
+                  onClick={handleSearch}
+                >
+                  <svg
+                    className="-ml-0.5 sm:-ml-1 mr-2 w-4 h-4 sm:h-5 sm:w-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
                   >
-                    <span
-                      className={`font-bold ${
-                        username === msg.username
-                          ? "text-green-400"
-                          : "text-brown-900"
-                      }`}
-                    >
-                      [{formatTimestamp(msg.timestamp)}] {msg.username}:
-                    </span>
-                    <span className="ml-2 text-black">{msg.message}</span>
-                  </li>
-                ))}
-              </ul>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                  </svg>
+                  Search
+                </button>
+              </div>
             </div>
-            <form
-              id="message-form"
-              className="flex items-center gap-2"
-              onSubmit={handleSendMessage}
-            >
-              <input
-                id="message-input"
-                type="text"
-                className="flex-grow border-2 p-2 rounded"
-                value={messageInput}
-                onChange={(e) => setMessageInput(e.target.value)}
-              />
-              <div id="bottom"></div>
-              <button
-                id="message-btn"
-                type="submit"
-                className="bg-brown-500 text-white px-4 py-2 rounded hover:bg-brown-800"
-              >
-                Send
-              </button>
-            </form>
+
+            <div className="flex flex-wrap">
+              <div className="w-full">
+                <div
+                  id="chat"
+                  className="overflow-y-scroll h-[30rem] bg-gray-50 p-4 rounded-md border-4 border-double border-gray-200 mb-4"
+                >
+                  <ul id="messages" className="list-none p-2">
+                    {messages.map((msg, index) => (
+                      <li
+                        key={index}
+                        className={`rounded-2xl p-2 my-2 ${
+                          username === msg.username
+                            ? "bg-amber-50"
+                            : "bg-brown-50"
+                        }`}
+                      >
+                        <span
+                          className={`font-bold ${
+                            username === msg.username
+                              ? "text-green-400"
+                              : "text-brown-900"
+                          }`}
+                        >
+                          [{formatTimestamp(msg.timestamp)}] {msg.username}:
+                        </span>
+                        <span className="ml-2 text-black">{msg.message}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <form
+                  id="message-form"
+                  className="flex items-center gap-2"
+                  onSubmit={handleSendMessage}
+                >
+                  <input
+                    id="message-input"
+                    type="text"
+                    className="flex-grow border-2 p-2 rounded"
+                    value={messageInput}
+                    onChange={(e) => setMessageInput(e.target.value)}
+                  />
+                  <div id="bottom"></div>
+                  <button
+                    id="message-btn"
+                    type="submit"
+                    className="bg-brown-500 text-white px-4 py-2 rounded hover:bg-brown-800"
+                  >
+                    Send
+                  </button>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      </div>
-    ) : (
-      <p className="mt-[15rem] text-center text-xl">You are not logged in.</p>
-    )}
+      ) : (
+        <p className="mt-[15rem] text-center text-xl">You are not logged in.</p>
+      )}
     </div>
   );
 };

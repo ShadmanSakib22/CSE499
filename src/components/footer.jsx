@@ -1,4 +1,3 @@
-import React from "react";
 import discord from "../assets/discord.svg";
 import twitter from "../assets/twitter.svg";
 import instagram from "../assets/instagram.svg";

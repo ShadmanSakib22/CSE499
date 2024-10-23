@@ -1,4 +1,3 @@
-import React from "react";
 import Advertise from "./advertise.jsx";
 
 const Services = () => {

@@ -1,4 +1,3 @@
-import React from "react";
 import { BackgroundBeams } from "./background-beams";
 import { Button } from "@material-tailwind/react";
 import bgimg from "../assets/remote-access.jpg";
