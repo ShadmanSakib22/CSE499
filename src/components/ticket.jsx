@@ -8,6 +8,7 @@ const TicketForm = () => {
   const [issue, setIssue] = useState("");
   const [description, setDescription] = useState("");
   const [budget, setBudget] = useState("");
+  const [timezone, setTimezone] = useState("");
   const [isPaid, setIsPaid] = useState(false);
 
   useEffect(() => {
@@ -29,50 +30,21 @@ const TicketForm = () => {
         issue,
         description,
         budget,
+        timezone,
         timestamp: Date.now(),
       });
       // Reset form fields after submission
       setIssue("");
       setDescription("");
       setBudget("");
+      setTimezone("");
       setIsPaid(false);
     }
   };
 
   const handlePayment = async () => {
-    try {
-      const response = await fetch("http://localhost:8000/php/checkout.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          total_amount: 0.5,
-          currency: "USD",
-          tran_id: "REF123",
-          success_url: "http://localhost:5173/success",
-          fail_url: "http://localhost:5173/fail",
-          cancel_url: "http://localhost:5173/cancel",
-          shipping_method: "No",
-          product_name: "Ticket Submission Fee",
-          product_category: "Service",
-          product_profile: "general",
-        }),
-      });
-
-      const text = await response.text();
-      console.log("Raw response:", text);
-
-      const data = JSON.parse(text);
-
-      if (data.GatewayPageURL) {
-        window.location.href = data.GatewayPageURL;
-      } else {
-        console.error("Failed to initiate payment");
-      }
-    } catch (error) {
-      console.error("Error initiating payment:", error);
-    }
+    /*if the payment is made*/
+    setIsPaid(true);
   };
 
   return (
@@ -105,8 +77,15 @@ const TicketForm = () => {
             value={budget}
             onChange={(e) => setBudget(e.target.value)}
             placeholder="Budget in USD"
-            required
             className="w-full p-2 border rounded"
+          />
+          <input
+            type="text"
+            value={timezone}
+            onChange={(e) => setTimezone(e.target.value)}
+            placeholder="Your Timezone"
+            className="w-full p-2 border rounded"
+            required
           />
           <button
             type="button"
@@ -117,7 +96,7 @@ const TicketForm = () => {
           </button>
           <button
             type="submit"
-            disabled={!isPaid || !issue || !description || !budget}
+            disabled={!isPaid || !issue || !description || !budget || !timezone}
             className="w-full p-2 bg-brown-800 text-white rounded disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Submit Ticket
