@@ -8,6 +8,7 @@ import {
   query,
   orderByChild,
   equalTo,
+  remove,
 } from "firebase/database";
 import { loadStripe } from "@stripe/stripe-js";
 
@@ -157,8 +158,13 @@ const TicketForm = () => {
     }
   }, [username]);
 
+  const handleDeleteTicket = async (ticketId) => {
+    const ticketRef = ref(database, `tickets/${ticketId}`);
+    await remove(ticketRef);
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-brown-50">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-brown-50 pt-[8rem]">
       {isLoggedIn ? (
         <div className="w-full ">
           <div className="mx-auto p-4 max-w-md bg-white rounded-lg shadow-md">
@@ -216,6 +222,11 @@ const TicketForm = () => {
               </button>
             </form>
           </div>
+          {paymentSuccess && (
+            <div className="mt-4 text-brown-600">
+              <p>Your ticket has been submitted successfully!</p>
+            </div>
+          )}
           <hr />
           <div className="block bg-white rounded-lg shadow-md p-4 my-8 md:my-12 w-[95%] md:w-4/5 mx-auto">
             <h1 className="font-bold text-gray-800 text-base md:text-lg lg:text-2xl p-4">
@@ -230,7 +241,7 @@ const TicketForm = () => {
                   <div className="flex flex-col md:flex-row gap-4">
                     <div className="flex-grow">
                       <details className="cursor-pointer">
-                        <summary className="font-semibold text-brown-800 text-lg">
+                        <summary className="font-semibold text-lg">
                           {ticket.issue}
                         </summary>
                         <div className="mt-2 pl-4 py-2 border-l-2">
@@ -251,6 +262,12 @@ const TicketForm = () => {
                         <span className="font-semibold">OS:</span>{" "}
                         {ticket.operatingsys}
                       </p>
+                      <button
+                        onClick={() => handleDeleteTicket(ticket.id)}
+                        className="mt-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
+                      >
+                        Delete Ticket
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -260,12 +277,6 @@ const TicketForm = () => {
         </div>
       ) : (
         <p className="text-center text-xl">Your are not logged in.</p>
-      )}
-
-      {paymentSuccess && (
-        <div className="mt-4 text-brown-600">
-          <p>Your ticket has been submitted successfully!</p>
-        </div>
       )}
     </div>
   );
