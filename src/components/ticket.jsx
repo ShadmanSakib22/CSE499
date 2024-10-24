@@ -221,17 +221,24 @@ const TicketForm = () => {
             <h1 className="font-bold text-gray-800 text-base md:text-lg lg:text-2xl p-4">
               Your Open <span className="text-brown-600">Tickets</span>:
             </h1>
-            <div className="overflow-y-auto max-h-96">
+            <div className="">
               {userTickets.map((ticket) => (
-                <div key={ticket.id} className="border rounded-md p-4">
+                <div
+                  key={ticket.id}
+                  className="border rounded-md p-4 mb-4 transition-all duration-300 ease-in-out"
+                >
                   <div className="flex flex-col md:flex-row gap-4">
                     <div className="flex-grow">
-                      {" "}
-                      <h3 className="font-semibold">{ticket.issue}</h3>
-                      <p>{ticket.description}</p>
+                      <details className="cursor-pointer">
+                        <summary className="font-semibold text-brown-800 text-lg">
+                          {ticket.issue}
+                        </summary>
+                        <div className="mt-2 pl-4 py-2 border-l-2">
+                          <p className="text-gray-700">{ticket.description}</p>
+                        </div>
+                      </details>
                     </div>
                     <div className="text-left md:text-right text-nowrap border-l-2 border-brown-600 pl-4">
-                      {" "}
                       <p>
                         <span className="font-semibold">Budget:</span> $
                         {ticket.budget}
@@ -239,6 +246,10 @@ const TicketForm = () => {
                       <p>
                         <span className="font-semibold">Timezone:</span>{" "}
                         {ticket.timezone}
+                      </p>
+                      <p>
+                        <span className="font-semibold">OS:</span>{" "}
+                        {ticket.operatingsys}
                       </p>
                     </div>
                   </div>
