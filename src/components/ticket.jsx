@@ -217,17 +217,31 @@ const TicketForm = () => {
             </form>
           </div>
           <hr />
-          <div className="block bg-white rounded-lg shadow-md p-4 mt-8 md:mt-12 w-4/5 mx-auto">
+          <div className="block bg-white rounded-lg shadow-md p-4 my-8 md:my-12 w-[95%] md:w-4/5 mx-auto">
             <h1 className="font-bold text-gray-800 text-base md:text-lg lg:text-2xl p-4">
               Your Open <span className="text-brown-600">Tickets</span>:
             </h1>
             <div className="overflow-y-auto max-h-96">
               {userTickets.map((ticket) => (
-                <div key={ticket.id} className="border-b p-4">
-                  <h3 className="font-semibold">{ticket.issue}</h3>
-                  <p>{ticket.description}</p>
-                  <p>Budget: ${ticket.budget}</p>
-                  <p>Timezone: {ticket.timezone}</p>
+                <div key={ticket.id} className="border rounded-md p-4">
+                  <div className="flex flex-col md:flex-row gap-4">
+                    <div className="flex-grow">
+                      {" "}
+                      <h3 className="font-semibold">{ticket.issue}</h3>
+                      <p>{ticket.description}</p>
+                    </div>
+                    <div className="text-left md:text-right text-nowrap border-l-2 border-brown-600 pl-4">
+                      {" "}
+                      <p>
+                        <span className="font-semibold">Budget:</span> $
+                        {ticket.budget}
+                      </p>
+                      <p>
+                        <span className="font-semibold">Timezone:</span>{" "}
+                        {ticket.timezone}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
