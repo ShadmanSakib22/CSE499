@@ -25,6 +25,7 @@ const TicketForm = () => {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [hasSubmitted, setHasSubmitted] = useState(false); // Prevent double submission
   const [userTickets, setUserTickets] = useState([]);
+  const [allTickets, setAllTickets] = useState([]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -158,6 +159,21 @@ const TicketForm = () => {
     }
   }, [username]);
 
+  // Add this useEffect to fetch all tickets
+  useEffect(() => {
+    const ticketsRef = ref(database, "tickets");
+    onValue(ticketsRef, (snapshot) => {
+      const tickets = [];
+      snapshot.forEach((childSnapshot) => {
+        tickets.push({
+          id: childSnapshot.key,
+          ...childSnapshot.val(),
+        });
+      });
+      setAllTickets(tickets);
+    });
+  }, []);
+
   const handleDeleteTicket = async (ticketId) => {
     const ticketRef = ref(database, `tickets/${ticketId}`);
     await remove(ticketRef);
@@ -206,10 +222,10 @@ const TicketForm = () => {
                 className="w-full p-2 border rounded"
               />
               <input
-                type="text"
+                type="number"
                 value={timezone}
                 onChange={(e) => setTimezone(e.target.value)}
-                placeholder="GMT Timezone"
+                placeholder="EST Timezone"
                 className="w-full p-2 border rounded"
                 required
               />
@@ -227,7 +243,7 @@ const TicketForm = () => {
               <p>Your ticket has been submitted successfully!</p>
             </div>
           )}
-          <hr />
+          {/* Display user's tickets */}
           <div className="block bg-white rounded-lg shadow-md p-4 my-8 md:my-12 w-[95%] md:w-4/5 mx-auto">
             <h1 className="font-bold text-gray-800 text-base md:text-lg lg:text-2xl p-4">
               Your Open <span className="text-brown-600">Tickets</span>:
@@ -255,7 +271,7 @@ const TicketForm = () => {
                         {ticket.budget}
                       </p>
                       <p>
-                        <span className="font-semibold">Timezone:</span>{" "}
+                        <span className="font-semibold">Timezone:</span> EST{" "}
                         {ticket.timezone}
                       </p>
                       <p>
@@ -268,6 +284,58 @@ const TicketForm = () => {
                       >
                         Delete Ticket
                       </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* Display all tickets */}
+          <div className="block bg-white rounded-lg shadow-md p-4 my-8 md:my-12 w-[95%] md:w-4/5 mx-auto">
+            <h1 className="font-bold text-gray-800 text-base md:text-lg lg:text-2xl p-4">
+              All <span className="text-brown-600">Tickets</span>:
+            </h1>
+            <div className="">
+              {allTickets.map((ticket) => (
+                <div
+                  key={ticket.id}
+                  className="border rounded-md p-4 mb-4 transition-all duration-300 ease-in-out"
+                >
+                  <div className="flex flex-col md:flex-row gap-4">
+                    <div className="flex-grow">
+                      <details className="cursor-pointer">
+                        <summary className="font-semibold text-lg">
+                          {ticket.issue}
+                          <span className="text-sm font-normal text-gray-500 ml-2">
+                            by {ticket.username}
+                          </span>
+                        </summary>
+                        <div className="mt-2 pl-4 py-2 border-l-2">
+                          <p className="text-gray-700">{ticket.description}</p>
+                        </div>
+                      </details>
+                    </div>
+                    <div className="text-left md:text-right text-nowrap border-l-2 border-brown-600 pl-4">
+                      <p>
+                        <span className="font-semibold">Budget:</span> $
+                        {ticket.budget}
+                      </p>
+                      <p>
+                        <span className="font-semibold">Timezone:</span> EST{" "}
+                        {ticket.timezone}
+                      </p>
+                      <p>
+                        <span className="font-semibold">OS:</span>{" "}
+                        {ticket.operatingsys}
+                      </p>
+                      {ticket.username === username && (
+                        <button
+                          onClick={() => handleDeleteTicket(ticket.id)}
+                          className="mt-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
+                        >
+                          Delete Ticket
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
