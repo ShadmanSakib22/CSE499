@@ -1,8 +1,11 @@
 import express from "express";
 import cors from "cors";
-
+import dotenv from "dotenv";
 import Stripe from "stripe";
-const stripe = new Stripe(import.meta.env.VITE_STRIPE_SECRET_KEY);
+
+dotenv.config();
+
+const stripe = new Stripe(process.env.VITE_STRIPE_SECRET_KEY);
 
 const app = express();
 const PORT = 4242;

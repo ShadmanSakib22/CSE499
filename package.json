@@ -19,7 +19,6 @@
     "clsx": "^2.1.1",
     "cors": "^2.8.5",
     "disqus-react": "^1.1.5",
-    "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "firebase": "^10.12.2",
     "framer-motion": "^11.2.6",
@@ -28,8 +27,8 @@
     "react-router-dom": "^6.23.1",
     "react-simple-typewriter": "^5.0.1",
     "stripe": "^17.2.1",
-    "tailwind-merge": "^2.3.0",
-    "tw-bootstrap-grid-optimizer": "^1.0.2"
+    "dotenv": "^16.4.5",
+    "tailwind-merge": "^2.3.0"    
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
