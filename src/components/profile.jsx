@@ -127,9 +127,9 @@ function UserProfile() {
   };
 
   return (
-    <div className="py-20 bg-brown-50 min-h-screen flex justify-center items-center">
+    <div className="py-[6rem] min-h-screen bg-brown-50 px-2">
       {user ? (
-        <div className="text-gray-600 space-y-5 p-4 px-10 shadow-xl rounded-xl bg-white border-4 border-double border-brown-100 w-4/5">
+        <div className="text-gray-600 space-y-5 px-3 md:px-6 max-w-[1100px] mx-auto shadow-xl rounded-xl bg-white border-4 border-double border-brown-100">
           <div className="bg-brown-400 rounded-r-full border-brown-50 border-2 shadow-sm shadow-brown-500 mt-4">
             <h1 className="text-3xl font-bold text-white p-1 ml-2">PROFILE</h1>
           </div>
@@ -167,7 +167,7 @@ function UserProfile() {
               className="border-4 border-double border-gray-600 rounded-md my-2"
             />
             <button
-              className="hover:bg-brown-600 w-40 h-10 rounded-lg bg-brown-500 text-white text-sm  border-2 border-brown-700 mb-4 lg:mb-0"
+              className="block hover:bg-brown-600 w-40 h-10 rounded-lg bg-brown-500 text-white text-sm  border-2 border-brown-700 mb-4 lg:mb-0"
               onClick={uploadProfilePicture}
             >
               Upload Profile Picture
@@ -205,11 +205,12 @@ function UserProfile() {
             />
           </div>
           <button
-            className="hover:bg-brown-600 w-40 h-10 rounded-lg bg-brown-500 text-white text-sm  border-2 border-brown-700"
+            className="block hover:bg-brown-600 w-40 h-10 rounded-lg bg-brown-500 text-white text-sm  border-2 border-brown-700"
             onClick={handleUpdatePassword}
           >
             Update Password
           </button>
+          <br />
         </div>
       ) : (
         <p className="text-center text-xl">You are not logged in.</p>

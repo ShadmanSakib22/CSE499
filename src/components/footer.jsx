@@ -55,7 +55,7 @@ const Footer = () => {
           ))}
         </ul>
 
-        <p className="text-gray-400 text-center text-nowrap mt-2  opacity-75">
+        <p className="text-gray-400 text-center mt-2  opacity-75">
           <a href="#" className="hover:underline px-1">
             © {new Date().getFullYear()}. All rights reserved
           </a>

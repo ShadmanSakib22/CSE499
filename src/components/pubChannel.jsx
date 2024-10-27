@@ -86,7 +86,7 @@ const PubChannel = () => {
   };
 
   return (
-    <div className="py-20 container mx-auto min-h-screen">
+    <div className="py-[6rem] px-2 md:px-4 max-w-[1100px] mx-auto min-h-screen">
       {username ? (
         <div>
           <div className="flex justify-between items-center border-b pb-4 mb-6">
@@ -98,7 +98,10 @@ const PubChannel = () => {
           <div className="w-full">
             <h6 className="text-lg mb-4">
               Hello,{" "}
-              <span id="userWelcomeMessage" className="font-semibold">
+              <span
+                id="userWelcomeMessage"
+                className="font-semibold break-words"
+              >
                 {username}
               </span>{" "}
               - Welcome to the public chatroom!
@@ -163,13 +166,13 @@ const PubChannel = () => {
                         <span
                           className={`font-bold ${
                             username === msg.username
-                              ? "text-green-400"
-                              : "text-brown-900"
+                              ? "text-green-400 break-words"
+                              : "text-brown-900 break-words"
                           }`}
                         >
                           [{formatTimestamp(msg.timestamp)}] {msg.username}:
                         </span>
-                        <span className="ml-2 text-black">{msg.message}</span>
+                        <p className="mt-1 text-black">{msg.message}</p>
                       </li>
                     ))}
                   </ul>

@@ -23,7 +23,7 @@ const Feedback = () => {
   };
 
   return (
-    <div className="py-20 container mx-auto">
+    <div className="py-[6rem] px-2 md:px-4 max-w-[1100px] mx-auto min-h-screen">
       <div className="flex justify-between items-center border-b pb-4 mb-6">
         <h2 className="text-2xl font-semibold">
           Clients🔗Technicians - Feedback

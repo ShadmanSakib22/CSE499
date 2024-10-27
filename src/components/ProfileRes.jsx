@@ -45,8 +45,8 @@ const ProfileRes = () => {
   };
 
   return (
-    <div className="py-20 bg-brown-50 min-h-screen flex justify-center items-center">
-      <div className="text-gray-600 space-y-5 p-4 px-10 shadow-xl rounded-xl bg-white border-4 border-double border-brown-100 w-4/5">
+    <div className="py-[6rem] min-h-screen bg-brown-50 px-2">
+      <div className="text-gray-600 space-y-5 px-3 md:px-6 max-w-[1100px] mx-auto shadow-xl rounded-xl bg-white border-4 border-double border-brown-100">
         {/*Search User*/}
         <div className="my-[30px]">
           <div className="relative w-full max-w-xl bg-white rounded-full">
