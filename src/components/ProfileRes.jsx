@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {
   getDatabase,
   ref,
+  set,
   get,
   child,
   query,
   orderByChild,
   equalTo,
   onValue,
+  update,
 } from "firebase/database";
 
 const ProfileRes = () => {
@@ -33,11 +36,15 @@ const ProfileRes = () => {
         const snapshot = await get(child(dbRef, `users`));
         if (snapshot.exists()) {
           const users = snapshot.val();
-          const user = Object.values(users).find(
-            (u) => u.email === query.trim()
+          // Find user and include their uid
+          const userEntries = Object.entries(users);
+          const userEntry = userEntries.find(
+            ([_, u]) => u.email === query.trim()
           );
-          if (user) {
-            setUserData(user);
+
+          if (userEntry) {
+            const [uid, userData] = userEntry;
+            setUserData({ ...userData, uid }); // Include uid in userData
             setError(null);
           } else {
             setUserData(null);
@@ -76,6 +83,74 @@ const ProfileRes = () => {
       });
     }
   }, [userData]);
+
+  ////////////////////////////////////////////////////////////////
+  useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setCurrentUserUid(user.uid);
+      }
+    });
+  }, []);
+
+  // Add this state to track if current user has rated
+  const [currentUserUid, setCurrentUserUid] = useState(null);
+
+  // Add this function to check if user has already rated
+  const checkUserRating = async (raterUid, targetUid) => {
+    const database = getDatabase();
+    const ratingRef = ref(database, `userRatings/${targetUid}/${raterUid}`);
+    const snapshot = await get(ratingRef);
+    return snapshot.exists() ? snapshot.val() : null;
+  };
+
+  const handleRating = async (newRating) => {
+    if (userData && currentUserUid) {
+      const database = getDatabase();
+      const userRef = ref(database, `users/${userData.uid}`);
+      const ratingRef = ref(
+        database,
+        `userRatings/${userData.uid}/${currentUserUid}`
+      );
+
+      const previousRating = await checkUserRating(
+        currentUserUid,
+        userData.uid
+      );
+      const currentRating = userData.rating || 0;
+      const currentTotalRatings = userData.totalRatings || 0;
+
+      let updatedRating;
+      let updatedTotalRatings = currentTotalRatings;
+
+      if (previousRating) {
+        // Update existing rating
+        const ratingSum = currentRating * currentTotalRatings;
+        updatedRating =
+          (ratingSum - previousRating + newRating) / currentTotalRatings;
+      } else {
+        // New rating
+        updatedRating =
+          (currentRating * currentTotalRatings + newRating) /
+          (currentTotalRatings + 1);
+        updatedTotalRatings = currentTotalRatings + 1;
+      }
+
+      await update(userRef, {
+        rating: updatedRating,
+        totalRatings: updatedTotalRatings,
+      });
+
+      await set(ratingRef, newRating);
+
+      setUserData((prev) => ({
+        ...prev,
+        rating: updatedRating,
+        totalRatings: updatedTotalRatings,
+      }));
+    }
+  };
 
   return (
     <div className="py-[6rem] min-h-screen bg-brown-50 px-2">
@@ -148,7 +223,38 @@ const ProfileRes = () => {
           <p className="text-red-500">{error}</p>
         )}
       </div>
-
+      {/* Review 5 stars */}
+      {userData && (
+        <div className="flex flex-col items-center justify-center gap-4 my-[5rem]">
+          <h2 className="text-xl font-bold mb-2">User Rating</h2>
+          <div className="flex items-center space-x-2">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <button
+                key={star}
+                onClick={() => handleRating(star)}
+                className="focus:outline-none"
+              >
+                <svg
+                  className={`w-8 h-8 ${
+                    star <= (userData.rating || 0)
+                      ? "text-yellow-400"
+                      : "text-gray-300"
+                  }`}
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              </button>
+            ))}
+          </div>
+          <div className="text-gray-600 ml-2">
+            ({userData.rating?.toFixed(1) || 0} / 5) from{" "}
+            {userData.totalRatings || 0} ratings
+          </div>
+        </div>
+      )}
       {/* Display user's tickets */}
       <div className="block bg-white rounded-lg shadow-md p-4 my-8 md:my-12 w-[95%] md:w-4/5 mx-auto">
         <h1 className="font-bold text-gray-800 text-base md:text-lg lg:text-2xl p-4">
