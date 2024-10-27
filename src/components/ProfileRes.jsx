@@ -202,10 +202,10 @@ const ProfileRes = () => {
             <p className="text-md mb-1">{userData.role}</p>
             <p className="text-md bg-gray-100 font-semibold">Verification:</p>
             <p className="text-md mb-1">{userData.verification}</p>
-            <p className="text-md bg-gray-100 font-semibold">
+            {/* <p className="text-md bg-gray-100 font-semibold">
               Subscription Status:
             </p>
-            <p className="text-md mb-1">{userData.subscription_status}</p>
+            <p className="text-md mb-1">{userData.subscription_status}</p> */}
             <p className="text-md bg-gray-100 font-semibold">User is:</p>
             <p className="text-md mb-1">{userData.login_status}</p>
             <hr className="clearfix w-100" />
