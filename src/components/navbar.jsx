@@ -60,7 +60,7 @@ const navListMenuItems = [
     path: "/support",
   },
   {
-    title: "The Team & Contact",
+    title: "Contact-Team",
     description: "Join as a Technician or Reach out to us for any Queries.",
     icon: UserGroupIcon,
     path: "/join-team",
@@ -108,8 +108,8 @@ function NavListMenu() {
   const renderItems = navListMenuItems.map(
     ({ icon, title, description, path }, key) => (
       <Link to={path} key={key}>
-        <MenuItem className="flex items-center gap-3 rounded-lg">
-          <div className="flex items-center justify-center rounded-lg p-2">
+        <MenuItem className="flex  gap-3 rounded-lg">
+          <div className="flex  justify-center rounded-lg p-2">
             {React.createElement(icon, {
               strokeWidth: 2,
               className: "h-6 text-gray-900 w-6",
