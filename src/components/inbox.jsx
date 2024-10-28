@@ -92,14 +92,14 @@ function Chat() {
   );
 
   return (
-    <div className="mx-auto py-[6rem] px-2 md:px-4 min-h-screen max-w-[1100px] flex flex-wrap justify-center items-center">
+    <div className="mx-auto py-[6rem] px-2 md:px-4 min-h-screen  flex flex-wrap justify-center items-center bg-brown-50">
       <div className="mb-3 ">
         <input
           type="email"
           placeholder="Search user by email"
           value={searchEmail}
           onChange={(e) => setSearchEmail(e.target.value)}
-          className="p-2 border rounded mr-2"
+          className="p-2 border border-gray-400 rounded mr-2"
         />
         <button
           onClick={() => findUserByEmail(searchEmail)}
@@ -117,6 +117,8 @@ function Chat() {
           <Inbox
             syncConversation={syncConversation}
             style={{ width: "100%", height: "500px" }}
+            showLoadingScreen={true}
+            loadingScreen={() => <div>Connecting to chat...</div>}
           />
         </Session>
       )}
