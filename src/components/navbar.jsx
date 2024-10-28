@@ -255,7 +255,7 @@ function NavList() {
         as="a"
         href="/ticket"
         variant="small"
-        color="text-light-green-50"
+        color="light-green"
         className="font-medium"
       >
         <ListItem className="flex items-center gap-2 py-2 pr-4 text-light-green-50 rounded-md bg-transparent">
@@ -266,7 +266,7 @@ function NavList() {
         as="a"
         href="#"
         variant="small"
-        color="text-light-green-50"
+        color="light-green"
         className="font-medium"
       >
         <ListItem className="flex items-center  py-2 pr-4 text-light-green-50 rounded-md bg-transparent">
@@ -292,7 +292,7 @@ export function NavbarMain() {
   return (
     <Navbar
       className="mx-auto bg-gradient-to-tr from-gray-900 to-brown-900 border-0 py-2 px-4 fixed z-20"
-      fullWidth="true"
+      fullWidth={true}
     >
       <div className="flex items-center justify-between text-light-green-50 w-full ">
         <div className="flex items-center ">

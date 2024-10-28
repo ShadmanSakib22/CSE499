@@ -16,6 +16,7 @@ import Support from "./components/pubChannel";
 import Feedback from "./components/feedback";
 import ProfileRes from "./components/ProfileRes";
 import Ticket from "./components/ticket";
+import Chat from "./components/inbox";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/support" element={<Support />} />
             <Route path="/feedback" element={<Feedback />} />
+            <Route path="/inbox" element={<Chat />} />
             <Route path="/profile-res" element={<ProfileRes />} />
             <Route path="*" element={<h1>404 Not Found</h1>} />
           </Routes>
