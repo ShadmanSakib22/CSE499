@@ -17,6 +17,8 @@ import Feedback from "./components/feedback";
 import ProfileRes from "./components/ProfileRes";
 import Ticket from "./components/ticket";
 import Chat from "./components/inbox";
+import Remote_access from "./components/remoteAccess";
+import Session from "./components/session";
 
 function App() {
   return (
@@ -38,6 +40,11 @@ function App() {
             <Route path="/feedback" element={<Feedback />} />
             <Route path="/inbox" element={<Chat />} />
             <Route path="/profile-res" element={<ProfileRes />} />
+            <Route path="/remote-access" element={<Remote_access />} />
+            <Route
+              path="/remote-access/_session_/:room_id"
+              element={<Session />}
+            />
             <Route path="*" element={<h1>404 Not Found</h1>} />
           </Routes>
           <Footer />
@@ -46,6 +53,23 @@ function App() {
     </Router>
   );
 }
+
+const ConditionalLayout = ({ children }) => {
+  const location = useLocation();
+
+  // Check if the current path matches the session route
+  const isSessionRoute = location.pathname.startsWith(
+    "/remote-access/_session_"
+  );
+
+  return (
+    <>
+      {!isSessionRoute && <NavbarMain />}
+      {children}
+      {!isSessionRoute && <Footer />}
+    </>
+  );
+};
 
 const HomePage = () => (
   <>
