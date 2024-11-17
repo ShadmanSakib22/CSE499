@@ -312,7 +312,10 @@ export function NavbarMain() {
           <NavList />
           <div className="ml-6"></div>
 
-          <Link to="/download">
+          <a
+            target="_blank"
+            href="https://northsouth0-my.sharepoint.com/:u:/g/personal/nafiz_iqbal_northsouth_edu/ESyxaJvqbXVLp5wiBxFY1yEBdFPm755DUYFfzvKvt1xaTA?e=DC89zM"
+          >
             <Button
               variant="gradient"
               color="brown"
@@ -322,7 +325,7 @@ export function NavbarMain() {
               <SparklesIcon className="h-5 w-5 mr-2" />
               Download
             </Button>
-          </Link>
+          </a>
         </div>
         <IconButton
           variant="text"
