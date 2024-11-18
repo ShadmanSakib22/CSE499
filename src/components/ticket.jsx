@@ -68,7 +68,7 @@ const TicketForm = () => {
     localStorage.setItem("operatingsys", operatingsys);
 
     const response = await fetch(
-      "http://localhost:4242/create-checkout-session",
+      "https://cse-499.vercel.app/create-checkout-session",
       {
         method: "POST",
         headers: {

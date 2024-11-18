@@ -8,7 +8,8 @@ dotenv.config();
 const stripe = new Stripe(process.env.VITE_STRIPE_SECRET_KEY);
 
 const app = express();
-const PORT = 4242;
+// Remove hardcoded PORT for Vercel
+// const PORT = 4242;
 
 app.use(cors());
 app.use(express.json());
@@ -27,15 +28,15 @@ app.post("/create-checkout-session", async (req, res) => {
             product_data: {
               name: `Support ticket: ${issue}`,
             },
-            unit_amount: 50, // Set your fee in cents (e.g., $0.50 = 50 cents)
+            unit_amount: 50,
           },
           quantity: 1,
         },
       ],
       mode: "payment",
       customer_email: email,
-      success_url: `http://localhost:5173/ticket?payment=success&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `http://localhost:5173/ticket?payment=cancelled`,
+      success_url: `https://cse-499.vercel.app/ticket?payment=success&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `https://cse-499.vercel.app/ticket?payment=cancelled`,
     });
 
     res.json({ id: session.id });
@@ -44,4 +45,5 @@ app.post("/create-checkout-session", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Modify the listen method for Vercel
+export default app;
