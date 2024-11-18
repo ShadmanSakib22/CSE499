@@ -314,7 +314,7 @@ export function NavbarMain() {
 
           <a
             target="_blank"
-            href="https://northsouth0-my.sharepoint.com/:u:/g/personal/nafiz_iqbal_northsouth_edu/ESyxaJvqbXVLp5wiBxFY1yEBdFPm755DUYFfzvKvt1xaTA?e=DC89zM"
+            href="https://northsouth0-my.sharepoint.com/:f:/g/personal/nafiz_iqbal_northsouth_edu/Eo0FWVK3ffNJnvBs_fHEqwYBfOPolJjiixzXsdQgFuiOMA?e=fYmljb"
           >
             <Button
               variant="gradient"
