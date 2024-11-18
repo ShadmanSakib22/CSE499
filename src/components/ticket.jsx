@@ -255,7 +255,7 @@ const TicketForm = () => {
             </form>
           </div>
           {paymentSuccess && (
-            <div className="mt-4 text-brown-600">
+            <div className="flex p-2 bg-white rounded-md justify-center mt-4 text-brown-600 mx-auto text-center">
               <p>Your ticket has been submitted successfully!</p>
             </div>
           )}
