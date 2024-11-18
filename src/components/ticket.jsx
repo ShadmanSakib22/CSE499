@@ -129,6 +129,9 @@ const TicketForm = () => {
       // Clear storage and update UI
       localStorage.clear();
       setPaymentSuccess(true);
+      setTimeout(() => {
+        setPaymentSuccess(false);
+      }, 10000);
       setHasSubmitted(true);
       window.history.replaceState({}, "", "/ticket");
     } catch (error) {
@@ -255,9 +258,9 @@ const TicketForm = () => {
             </form>
           </div>
           {paymentSuccess && (
-            <div className="flex p-2 bg-white rounded-md justify-center mt-4 text-brown-600 mx-auto text-center">
+            <span className="flex p-2 bg-white rounded-md justify-center mt-4 text-brown-600 mx-auto text-center">
               <p>Your ticket has been submitted successfully!</p>
-            </div>
+            </span>
           )}
           {/* Display user's tickets */}
           <div className="block bg-white rounded-lg shadow-md p-4 my-8 md:my-12 w-[95%] md:w-4/5 mx-auto">
