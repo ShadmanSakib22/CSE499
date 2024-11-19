@@ -203,7 +203,7 @@ const PubChannel = () => {
           </div>
         </div>
       ) : (
-        <p className="mt-[15rem] text-center text-xl">You are not logged in.</p>
+        <p className="mt-[15rem] text-center text-xl">You are not Logged in.</p>
       )}
     </div>
   );

@@ -253,7 +253,7 @@ const TicketForm = () => {
                 onClick={handlePayment}
                 className="w-full p-2 bg-brown-500 text-white rounded"
               >
-                Submit ($0.50 USD)
+                Submit ($1.50 USD)
               </button>
             </form>
           </div>
@@ -382,7 +382,7 @@ const TicketForm = () => {
           </div>
         </div>
       ) : (
-        <p className="text-center text-xl">Your are not logged in.</p>
+        <p className="text-center text-xl">You are not Logged in.</p>
       )}
     </div>
   );

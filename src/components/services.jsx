@@ -46,16 +46,6 @@ const Services = () => {
 
 const ServicesData = [
   {
-    title: "Video Calling",
-    description: "Ability to Join or Start a Video call",
-    imageSrc: "video-call.svg",
-  },
-  {
-    title: "Screen Share",
-    description: "Ability to Share your Screen",
-    imageSrc: "screenshare.svg",
-  },
-  {
     title: "Inbox",
     description: "Direct Messaging Capabilities",
     imageSrc: "inbox.svg",
@@ -66,13 +56,24 @@ const ServicesData = [
     imageSrc: "chatroom.svg",
   },
   {
-    title: "Forums",
-    description: "Subreddit to Share Experiences",
+    title: "Tickets",
+    description: "For Advertising your Requirements and get Hires faster",
     imageSrc: "forum.svg",
   },
   {
-    title: "Remote Access Tool",
-    description: "Our very own Secure Remote Access tool",
+    title: "Profile Review",
+    description: "Search and View Profile Testimonials",
+    imageSrc: "screenshare.svg",
+  },
+  {
+    title: "Video Calling & Screenshare",
+    description:
+      "Video Calling and Screen Sharing all in one with Remote Access",
+    imageSrc: "video-call.svg",
+  },
+  {
+    title: "Remote Access",
+    description: "Secure Remote Access through your Browser",
     imageSrc: "remote.svg",
   },
 ];

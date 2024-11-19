@@ -239,7 +239,7 @@ function UserProfile() {
           <br />
         </div>
       ) : (
-        <p className="text-center text-xl">You are not logged in.</p>
+        <p className="text-center text-xl">You are not Logged in.</p>
       )}
     </div>
   );

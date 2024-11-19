@@ -28,7 +28,7 @@ app.post("/create-checkout-session", async (req, res) => {
             product_data: {
               name: `Support ticket: ${issue}`,
             },
-            unit_amount: 50,
+            unit_amount: 1.5,
           },
           quantity: 1,
         },
