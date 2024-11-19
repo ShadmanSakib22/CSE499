@@ -54,23 +54,6 @@ function App() {
   );
 }
 
-const ConditionalLayout = ({ children }) => {
-  const location = useLocation();
-
-  // Check if the current path matches the session route
-  const isSessionRoute = location.pathname.startsWith(
-    "/remote-access/_session_"
-  );
-
-  return (
-    <>
-      {!isSessionRoute && <NavbarMain />}
-      {children}
-      {!isSessionRoute && <Footer />}
-    </>
-  );
-};
-
 const HomePage = () => (
   <>
     <HeroSection />
