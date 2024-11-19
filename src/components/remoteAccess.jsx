@@ -60,7 +60,7 @@ export default function Remote_access() {
         alert(
           "Free session expired. Please upgrade to continue or start a new session."
         );
-      }, 30 * 60 * 1000); // 30 minutes
+      }, 2 * 60 * 1000); // 30 minutes
     }
   };
 
@@ -75,7 +75,7 @@ export default function Remote_access() {
         alert(
           "Free session expired. Please upgrade to continue or start a new session."
         );
-      }, 30 * 60 * 1000); // 30 minutes
+      }, 2 * 60 * 1000); // 30 minutes
     }
   };
 
