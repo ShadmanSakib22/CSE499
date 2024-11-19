@@ -1,5 +1,10 @@
 // src/App.js
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import { AuthProvider } from "./contexts/authContext";
 
 import NavbarMain from "./components/navbar";
@@ -25,34 +30,52 @@ function App() {
     <Router>
       <div>
         <AuthProvider>
-          <NavbarMain />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/join-team" element={<JoinTeam />} />
-            <Route path="/ticket" element={<Ticket />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/logout" element={<Logout />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/support" element={<Support />} />
-            <Route path="/feedback" element={<Feedback />} />
-            <Route path="/inbox" element={<Chat />} />
-            <Route path="/profile-res" element={<ProfileRes />} />
-            <Route path="/remote-access" element={<Remote_access />} />
-            <Route
-              path="/remote-access/_session_/:room_id"
-              element={<Session />}
-            />
-            <Route path="*" element={<h1>404 Not Found</h1>} />
-          </Routes>
-          <Footer />
+          <ConditionalLayout>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/join-team" element={<JoinTeam />} />
+              <Route path="/ticket" element={<Ticket />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/logout" element={<Logout />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/support" element={<Support />} />
+              <Route path="/feedback" element={<Feedback />} />
+              <Route path="/inbox" element={<Chat />} />
+              <Route path="/profile-res" element={<ProfileRes />} />
+              <Route path="/remote-access" element={<Remote_access />} />
+              <Route
+                path="/remote-access/_session_/:room_id"
+                element={<Session />}
+              />
+              <Route path="*" element={<h1>404 Not Found</h1>} />
+            </Routes>
+          </ConditionalLayout>
         </AuthProvider>
       </div>
     </Router>
   );
 }
+
+// Conditional layout component
+const ConditionalLayout = ({ children }) => {
+  const location = useLocation();
+
+  // Check if the current path matches the session route
+  const isSessionRoute = location.pathname.startsWith(
+    "/remote-access/_session_"
+  );
+
+  return (
+    <>
+      {!isSessionRoute && <NavbarMain />}
+      {children}
+      {!isSessionRoute && <Footer />}
+    </>
+  );
+};
 
 const HomePage = () => (
   <>
