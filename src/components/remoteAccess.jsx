@@ -5,45 +5,95 @@ import { ArrowElbowUpRight, Password, Rss } from "phosphor-react";
 import { nanoid } from "nanoid";
 import featureImage from "../assets/feature.svg";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../firebase/firebase";
+import { auth, database } from "../firebase/firebase";
+import { ref as dbRef, get } from "firebase/database";
 
 export default function Remote_access() {
   const navigate = useNavigate();
   const [room, setRoom] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [subscriptionStatus, setSubscriptionStatus] = useState("");
+  const [user, setUser] = useState(null);
+  const sessionTimerRef = useRef(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
         setIsLoggedIn(true);
+        getUserData(currentUser.uid);
       } else {
         setIsLoggedIn(false);
+        setUser(null);
       }
     });
 
-    return () => unsubscribe();
+    return () => {
+      unsubscribe();
+      if (sessionTimerRef.current) {
+        clearTimeout(sessionTimerRef.current);
+      }
+    };
   }, []);
+
+  const getUserData = async (uid) => {
+    try {
+      const userRef = dbRef(database, `users/${uid}`);
+      const snapshot = await get(userRef);
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        setSubscriptionStatus(data.subscription_status || "Free");
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
 
   const create = async () => {
     const roomID = await nanoid(7);
     sessionStorage.setItem("hasRefreshed", "false");
     navigate(`/remote-access/_session_/${roomID}`);
+
+    if (subscriptionStatus === "Free") {
+      sessionTimerRef.current = setTimeout(() => {
+        navigate("/remote-access");
+        alert(
+          "Free session expired. Please upgrade to continue or start a new session."
+        );
+      }, 30 * 60 * 1000); // 30 minutes
+    }
   };
 
   const joinRoom = () => {
     if (room.trim() === "") return;
     sessionStorage.setItem("hasRefreshed", "false");
     navigate(`/remote-access/_session_/${room.trim()}`);
+
+    if (subscriptionStatus === "Free") {
+      sessionTimerRef.current = setTimeout(() => {
+        navigate("/remote-access");
+        alert(
+          "Free session expired. Please upgrade to continue or start a new session."
+        );
+      }, 30 * 60 * 1000); // 30 minutes
+    }
   };
 
   return (
     <>
-      <div className="py-[5rem] min-h-screen grid items-center">
+      <div className="py-[5rem] min-h-screen grid items-center overflow-hidden">
         {isLoggedIn ? (
           <div className="flex min-h-screen">
-            {/* Rest of your existing JSX code */}
             <div className="flex flex-col md:flex-row w-screen">
               <div className="basis-4/6 bg-white rounded-xl p-10">
+                <div className="text-sm font-semibold text-blue-400 mb-4">
+                  Current Plan: {subscriptionStatus}
+                  {subscriptionStatus === "Free" && (
+                    <span className="ml-2 text-yellow-600 font-medium">
+                      (30 minutes session limit)
+                    </span>
+                  )}
+                </div>
                 <div className="space-y-4 mt-5 px-1 py-4">
                   <h5 className="text-2xl font-semibold text-brown-900">
                     Connect, Collaborate, Control: Anytime, Anywhere.
@@ -107,7 +157,7 @@ export default function Remote_access() {
             </div>
           </div>
         ) : (
-          <p className="text-center text-xl">You are not Logged in.</p>
+          <p className="text-center text-xl">You are not logged in.</p>
         )}
       </div>
     </>

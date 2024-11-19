@@ -146,10 +146,10 @@ function UserProfile() {
             <p className="text-md mb-1">{role}</p>
             <p className="text-md bg-gray-100 font-semibold">Verification:</p>
             <p className="text-md mb-1">{verification}</p>
-            {/* <p className="text-md bg-gray-100 font-semibold">
+            <p className="text-md bg-gray-100 font-semibold">
               Subscription Status:
             </p>
-            <p className="text-md mb-1">{subscriptionStatus}</p> */}
+            <p className="text-md mb-1">{subscriptionStatus}</p>
             <p className="text-md bg-gray-100 font-semibold">User is:</p>
             <p className="text-md mb-1">{onlineStatus}</p>
             <p className="text-md bg-gray-100 font-semibold">Rating:</p>
