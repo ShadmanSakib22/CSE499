@@ -520,7 +520,7 @@ const Session = () => {
                 </Button>
               </div>
             </div>
-            <div className="bg-white  absolute  top-0 -translate-y-1/4 left-1/2 -translate-x-1/2  flex gap-2 px-2 py-1 rounded-md shadow-md  ">
+            <div className="bg-gray-400  absolute  top-0 -translate-y-1/4 left-1/2 -translate-x-1/2  flex gap-2 px-2 py-1 rounded-md shadow-md  ">
               {/* <div>
         <Tooltip
           content="Mic"
@@ -561,7 +561,7 @@ const Session = () => {
 
                 <Button
                   shape="icon"
-                  className="rounded-xl bg-black opacity-85 hover:scale-105 hover:duration-500 hover:bg-black hover:text-white hover:-translate-y-1 "
+                  className="rounded-xl p-2 bg-black opacity-85  hover:duration-500 hover:text-blue-400"
                   onClick={shareScreen}
                 >
                   <Monitor />
@@ -570,7 +570,7 @@ const Session = () => {
               <div>
                 <Button
                   shape="icon"
-                  className="rounded-xl bg-red-600 opacity-95 hover:-translate-y-1 hover:bg-red-600 hover:text-black"
+                  className="rounded-xl p-2 bg-red-400 opacity-95 hover:duration-500 hover:bg-red-900"
                   onClick={leaveRoom}
                 >
                   <Phone />
