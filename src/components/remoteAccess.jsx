@@ -89,7 +89,7 @@ export default function Remote_access() {
                 <div className="text-sm font-semibold text-blue-400 mb-4">
                   Current Plan: {subscriptionStatus}
                   {subscriptionStatus === "Free" && (
-                    <span className="ml-2 text-yellow-600 font-medium">
+                    <span className="ml-2 text-black font-medium">
                       (30 minutes session limit)
                     </span>
                   )}
@@ -133,14 +133,14 @@ export default function Remote_access() {
                   </form>
                 </div>
                 <Divider className="mt-5" size="md" color="secondary" />
-                <p className="text-body-4 mt-1">
+                <p className="text-sm mt-4">
+                  For Guidances and Support,{" "}
                   <a
                     className="text-blue-500 hover:text-blue-700"
                     href="/about"
                   >
-                    Learn
-                  </a>{" "}
-                  more about us.
+                    Click here
+                  </a>
                 </p>
               </div>
               <div className="flex basis-2/6 justify-center items-center">

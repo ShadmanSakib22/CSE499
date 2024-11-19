@@ -2,6 +2,8 @@ import Peer from "peerjs";
 import { connect, io } from "socket.io-client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { ref as dbRef, get } from "firebase/database";
+import { auth, database } from "../firebase/firebase";
 import {
   Button,
   Drawer,
@@ -44,6 +46,8 @@ const Session = () => {
   const [socketState, setSocketState] = useState(null);
   const [loader, setLoader] = useState(true);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [subscriptionStatus, setSubscriptionStatus] = useState("");
+  const sessionTimerRef = useRef(null);
 
   const navigate = useNavigate();
   const establishConnection = useCallback((peerId) => {
@@ -293,12 +297,65 @@ const Session = () => {
     }
   }, [socketRef.current, handleRecieveText]);
 
+  // Add this useEffect for subscription check
+  useEffect(() => {
+    const checkSubscription = async () => {
+      const user = auth.currentUser;
+      if (user) {
+        const userRef = dbRef(database, `users/${user.uid}`);
+        const snapshot = await get(userRef);
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          setSubscriptionStatus(data.subscription_status || "Free");
+
+          if (data.subscription_status === "Free") {
+            sessionTimerRef.current = setTimeout(() => {
+              leaveRoom();
+              alert(
+                "Free session expired. Please upgrade to continue or start a new session."
+              );
+            }, 2 * 60 * 1000); // 30 minutes
+          }
+        }
+      }
+    };
+
+    checkSubscription();
+
+    return () => {
+      if (sessionTimerRef.current) {
+        clearTimeout(sessionTimerRef.current);
+      }
+    };
+  }, []);
+
+  const [timeLeft, setTimeLeft] = useState(2 * 60); // 30 minutes in seconds
+
+  // useEffect for countdown
+  useEffect(() => {
+    if (subscriptionStatus === "Free") {
+      const timer = setInterval(() => {
+        setTimeLeft((prevTime) => {
+          if (prevTime <= 1) {
+            clearInterval(timer);
+            return 0;
+          }
+          return prevTime - 1;
+        });
+      }, 1000);
+
+      return () => clearInterval(timer);
+    }
+  }, [subscriptionStatus]);
+
   const leaveRoom = () => {
     if (socketRef.current) {
       socketRef.current.disconnect();
     }
-    // navigate("/remote-access");
-    navigate("/");
+    if (sessionTimerRef.current) {
+      clearTimeout(sessionTimerRef.current);
+    }
+    navigate("/remote-access");
   };
 
   const copyToClipBoard = async (e) => {
@@ -394,7 +451,13 @@ const Session = () => {
         <div className="bg-black opacity-90 h-screen grid grid-rows-1   ">
           {/* main body  */}
           {/* here the user joined notification will show  */}
-
+          {/* subscription indicator */}
+          {subscriptionStatus === "Free" && (
+            <div className="absolute top-2 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-black font-bold px-3 py-1 rounded-md z-50">
+              Free Session: {Math.floor(timeLeft / 60)}:
+              {(timeLeft % 60).toString().padStart(2, "0")} min
+            </div>
+          )}
           <div className=" relative  basis-11/12 overflow-hidden">
             {/* this is remote video stream */}
 
