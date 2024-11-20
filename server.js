@@ -11,7 +11,12 @@ const app = express();
 // Remove hardcoded PORT for Vercel
 // const PORT = 4242;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://cse-499.vercel.app", "http://localhost:5173"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // Ticket submission endpoint
@@ -79,9 +84,13 @@ app.post("/create-subscription", async (req, res) => {
       cancel_url: `https://cse-499.vercel.app/subscription?status=cancelled`,
     });
 
-    res.json({ id: session.id });
+    res.status(200).json({ id: session.id });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("Stripe Error:", error);
+    res.status(500).json({
+      error: error.message,
+      details: error.stack,
+    });
   }
 });
 
