@@ -264,13 +264,13 @@ function NavList() {
       </Typography>
       <Typography
         as="a"
-        href="#"
+        href="/subscription"
         variant="small"
         color="light-green"
         className="font-medium"
       >
         <ListItem className="flex items-center  py-2 pr-4 text-light-green-50 rounded-md bg-transparent">
-          Policies
+          Subsribe
         </ListItem>
       </Typography>
       <NavListMenu />

@@ -24,6 +24,7 @@ import Ticket from "./components/ticket";
 import Chat from "./components/inbox";
 import Remote_access from "./components/remoteAccess";
 import Session from "./components/session";
+import Subscription from "./components/subscription";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
               <Route path="/feedback" element={<Feedback />} />
               <Route path="/inbox" element={<Chat />} />
               <Route path="/profile-res" element={<ProfileRes />} />
+              <Route path="/subscription" element={<Subscription />} />
               <Route path="/remote-access" element={<Remote_access />} />
               <Route
                 path="/remote-access/_session_/:room_id"
