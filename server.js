@@ -27,8 +27,11 @@ app.post("/create-checkout-session", async (req, res) => {
             currency: "usd",
             product_data: {
               name: `Support ticket: ${issue}`,
+              description:
+                "For security purposes, we require you to pay a fine of $0.50 per ticket submission.",
+              images: ["https://cse-499.vercel.app/ticket-stripe.jpg"],
             },
-            unit_amount: 50,
+            unit_amount: 150,
           },
           quantity: 1,
         },
