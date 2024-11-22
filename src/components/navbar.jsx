@@ -270,7 +270,7 @@ function NavList() {
         className="font-medium"
       >
         <ListItem className="flex items-center  py-2 pr-4 text-light-green-50 rounded-md bg-transparent">
-          Subsribe
+          Subscribe
         </ListItem>
       </Typography>
       <NavListMenu />

@@ -27,19 +27,22 @@ const Subscription = () => {
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     const status = queryParams.get("status");
+    const sessionId = queryParams.get("session_id"); // Add this line
 
-    if (status === "success") {
+    if (status === "success" && sessionId) {
+      // Check for both status and sessionId
       handleSubscriptionSuccess();
       window.history.replaceState({}, "", "/subscription");
     }
   }, []);
 
   const handleSubscriptionSuccess = async () => {
-    if (username) {
-      const userRef = ref(database, `users/${auth.currentUser.uid}`);
+    const user = auth.currentUser; // Get current user explicitly
+    if (user) {
+      const userRef = ref(database, `users/${user.uid}`);
       try {
         await set(userRef, {
-          email: username,
+          email: user.email,
           subscription_status: "Paid",
           subscriptionDate: Date.now(),
         });

@@ -142,6 +142,15 @@ export default function Remote_access() {
                     Click here
                   </a>
                 </p>
+                <p className="text-sm mt-4">
+                  To <strong>Subscribe</strong>,{" "}
+                  <a
+                    className="text-blue-500 hover:text-blue-700"
+                    href="/subscription"
+                  >
+                    Click here
+                  </a>
+                </p>
               </div>
               <div className="flex basis-2/6 justify-center items-center">
                 <div className="rounded-xl">

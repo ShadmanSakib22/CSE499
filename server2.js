@@ -39,7 +39,7 @@ app.post("/create-subscription", async (req, res) => {
       ],
       mode: "subscription",
       customer_email: email,
-      success_url: `https://cse-499.vercel.app/subscription?status=success`,
+      success_url: `https://cse-499.vercel.app/subscription?status=success&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `https://cse-499.vercel.app/subscription?status=cancelled`,
     });
 
