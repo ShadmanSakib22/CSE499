@@ -73,7 +73,8 @@ const ConditionalLayout = ({ children }) => {
   return (
     <>
       {!isSessionRoute && <NavbarMain />}
-      {children}
+      {children && <div className="min-h-screen">{children}</div>}
+
       {!isSessionRoute && <Footer />}
     </>
   );

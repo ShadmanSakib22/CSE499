@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, database } from "../firebase/firebase";
-import { ref, set } from "firebase/database";
+import { ref, update } from "firebase/database";
 import { loadStripe } from "@stripe/stripe-js";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
@@ -37,15 +37,15 @@ const Subscription = () => {
   }, []);
 
   const handleSubscriptionSuccess = async () => {
-    const user = auth.currentUser; // Get current user explicitly
+    const user = auth.currentUser;
     if (user) {
       const userRef = ref(database, `users/${user.uid}`);
       try {
-        await set(userRef, {
-          email: user.email,
+        const updates = {
           subscription_status: "Paid",
           subscriptionDate: Date.now(),
-        });
+        };
+        await update(userRef, updates);
         setSubscriptionSuccess(true);
         setTimeout(() => setSubscriptionSuccess(false), 5000);
       } catch (error) {
